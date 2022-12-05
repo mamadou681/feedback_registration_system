@@ -6,7 +6,8 @@ This project is a feedback registration system where the users can submit a form
 1. you need to have Docker installed
 2. And run **docker pull debian** 
 3. clone this repo: git clone **https://github.com/mamadou681/feedback_registration_system.git**
-4. run : **docker compose up**
+4. **cd** feedback_registration_system
+5. run : **docker compose up**
 
 # Description
 
@@ -23,6 +24,10 @@ To send the data to the database you need just to go the url: [http://localhost:
 * database: pgdb.
 
 In the terminal you can run: **psql -h localhost -p 5432 -U pgadmin -W pgdb** to get access to the database.
+
+**The rabbitmq credentials**
+* username: admin
+* password: admin
 
 # Tools used
 - Docker (debian image)
