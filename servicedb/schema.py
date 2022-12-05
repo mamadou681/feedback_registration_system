@@ -1,9 +1,8 @@
 import datetime as _dt
+from pydantic import BaseModel
 
-import pydantic as _pydantic
 
-
-class _BaseUserInfo(_pydantic.BaseModel):
+class _BaseUserInfo(BaseModel):
     lastName: str
     firstName: str
     patronymic: str
@@ -15,7 +14,7 @@ class CreateUserInfo(_BaseUserInfo):
     pass
 
 
-class UserInfo(_BaseUserInfo):
+class Userinfo(_BaseUserInfo):
     id: int
     date_created: _dt.datetime
 

@@ -35,15 +35,19 @@ services:
     container_name: db_c
     env_file:
     - .env
+    restart: always
     ports:
       - 5432:5432
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q"]
     volumes:
       - ./db:/db
   servicedb:
     build: ./servicedb
     container_name: servicedb_c
     depends_on:
-      - db
+      db: 
+          condition: service_healthy
     restart: on-failure
     env_file:
       - .env

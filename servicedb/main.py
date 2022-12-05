@@ -1,14 +1,14 @@
-import fastapi as _fastapi
-import sqlalchemy.orm as _orm
+from fastapi import Depends, FastAPI
+from sqlalchemy.orm import Session
 import uvicorn
 
-import services as _services
+from services import get_db, add_table
 from forward_to_db import fetch_from_rabbitmq
 
 # Create the table
-_services.add_table()
+add_table()
 # Create the object
-app = _fastapi.FastAPI()
+app = FastAPI()
 
 
 @app.get("/")
@@ -17,7 +17,7 @@ async def root():
 
 
 @app.get("/fetchdata")
-async def create_userinfo(db: _orm.Session = _fastapi.Depends(_services.get_db)):
+async def create_userinfo(db: Session = Depends(get_db)):
     return await fetch_from_rabbitmq(db)
 
 

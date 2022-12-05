@@ -1,16 +1,16 @@
 import datetime as _dt
-import sqlalchemy as _sql
+from sqlalchemy import Column, String, DateTime, Integer
 
 
-import database as _database
+from database import Base
 
 
-class UserInfo(_database.Base):
+class UserInfo(Base):
     __tablename__ = "userinfo"
-    id = _sql.Column(_sql.Integer, primary_key=True, index=True)
-    lastName = _sql.Column(_sql.String, index=True)
-    firstName = _sql.Column(_sql.String, index=True)
-    patronymic = _sql.Column(_sql.String, index=True)
-    telephone = _sql.Column(_sql.String, index=True)
-    message = _sql.Column(_sql.String, index=True)
-    date_created = _sql.Column(_sql.DateTime, default=_dt.datetime.utcnow)
+    id = Column(Integer, primary_key=True, index=True)
+    lastName = Column(String, index=True)
+    firstName = Column(String, index=True)
+    patronymic = Column(String, index=True)
+    telephone = Column(String, index=True)
+    message = Column(String, index=True)
+    date_created = Column(DateTime, default=_dt.datetime.utcnow)

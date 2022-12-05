@@ -1,27 +1,25 @@
-from typing import TYPE_CHECKING
-
-import database as _database
-import models as _models
 from sqlalchemy.orm import Session
 
-import schema as _schema
+from database import Base, engine, SessionLocal
+from models import UserInfo
+from schema import CreateUserInfo, Userinfo
 
 
 def add_table():
-    return _database.Base.metadata.create_all(bind=_database.engine)
+    return Base.metadata.create_all(bind=engine)
 
 
 def get_db():
-    db = _database.SessionLocal()
+    db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
 
 
-def create_userinfo(db: Session, userinfo: _schema.CreateUserInfo):
-    userinfo = _models.UserInfo(**userinfo)
+def create_userinfo(db: Session, userinfo: CreateUserInfo):
+    userinfo = UserInfo(**userinfo)
     db.add(userinfo)
     db.commit()
     db.refresh(userinfo)
-    return _schema.UserInfo.from_orm(userinfo)
+    return Userinfo.from_orm(userinfo)

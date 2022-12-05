@@ -1,6 +1,6 @@
-import sqlalchemy as _sql
-import sqlalchemy.ext.declarative as _declarative
-import sqlalchemy.orm as _orm
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
 from credentials import Credentials
 # Create database url
@@ -9,9 +9,9 @@ part_url = f"{Credentials.db_username}:{Credentials.db_password}@db/{Credentials
 DATABASE_URL = "postgresql://" + part_url
 print(DATABASE_URL)
 # Create the engine
-engine = _sql.create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL)
 
-SessionLocal = _orm.sessionmaker(
+SessionLocal = sessionmaker(
     autocommit=False, autoflush=False, bind=engine)
 
-Base = _declarative.declarative_base()
+Base = declarative_base()

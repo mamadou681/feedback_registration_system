@@ -2,7 +2,7 @@ import pika
 import json
 
 from credentials import Credentials
-import services as _services
+from services import create_userinfo
 
 # Getting rabbitmq credentials and its params
 rabbitmq_credentials = pika.PlainCredentials(
@@ -24,7 +24,7 @@ async def fetch_from_rabbitmq(db):
         print(method_frame.delivery_tag)
         userinfo = body.decode("utf-8")
         userinfo = json.loads(userinfo)
-        _services.create_userinfo(db, userinfo=userinfo)
+        create_userinfo(db, userinfo=userinfo)
         print(userinfo)
         print()
         channel.basic_ack(delivery_tag=method_frame.delivery_tag)
