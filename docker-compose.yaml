@@ -35,11 +35,17 @@ services:
     container_name: db_c
     env_file:
     - .env
+    environment:
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_HOST: ${POSTGRES_HOST}
     restart: always
     ports:
       - 5432:5432
     healthcheck:
-      test: ["CMD", "pg_isready", "-q"]
+      test: [ "CMD-SHELL", "pg_isready -d $${DATABASE_NAME} -U postgres" ]
     volumes:
       - ./db:/db
   servicedb:
