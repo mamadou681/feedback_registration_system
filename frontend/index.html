@@ -1,0 +1,115 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Registration system</title>
+    <link rel="stylesheet" href="index.css" />
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper purple">
+        <a href="#" class="brand-logo my-logo">Ростелеком</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="#">система регистрации обращений</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="row myform-container">
+      <form id="myForm" class="col s12">
+        <div class="row">
+          <div class="input-field col s6">
+            <i class="material-icons prefix">account_circle</i>
+            <input
+              placeholder="введите Фамилию"
+              id="last_name"
+              type="text"
+              class="validate"
+              value=""
+              name="lastName"
+              required
+            />
+            <label for="last_name">Фамилия</label>
+          </div>
+          <div class="input-field col s6">
+            <input
+              required
+              placeholder="введите имя"
+              id="first_name"
+              type="text"
+              class="validate"
+              value=""
+              name="firstName"
+            />
+            <label for="first_name">Имя</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input
+              placeholder="введите Отчество"
+              id="patronymic"
+              type="text"
+              class="validate"
+              value=""
+              name="patronymic"
+            />
+            <label for="patronymic">Отчество</label>
+          </div>
+          <div class="input-field col s6">
+            <i class="material-icons prefix">phone</i>
+            <input
+              required
+              placeholder="введите Телефон"
+              id="telephone"
+              type="tel"
+              class="validate"
+              value=""
+              name="telephone"
+            />
+            <label for="icon_telephone">Телефон</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea
+              required
+              placeholder="введите причину вашего обращения"
+              id="textarea"
+              class="materialize-textarea"
+              value=""
+              name="message"
+            ></textarea>
+            <label for="textarea">обращения</label>
+          </div>
+        </div>
+      </form>
+      <div class="row center">
+        <button
+          id="submitBtn"
+          class="btn waves-effect waves-light"
+          type="submit"
+          name="action"
+        >
+          Отправить
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

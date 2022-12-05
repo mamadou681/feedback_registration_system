@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    container_name: frontend_c
+    ports:
+      - 80:80
+    volumes:
+      - ./frontend:/frontend:ro
+  backend:
+    build: ./backend
+    container_name: backend_c
+    env_file:
+      - .env
+    ports:
+      - 8888:8888
+    volumes:
+      - ./backend:/backend:ro
+  rabbitmq:
+    build: ./rabbitmq
+    container_name: rabbitmq_c
+    env_file:
+      - .env
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./rabbitmq:/rabbit_install
+  db:
+    build: ./db
+    container_name: db_c
+    env_file:
+    - .env
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db:/db
+  servicedb:
+    build: ./servicedb
+    container_name: servicedb_c
+    depends_on:
+      - db
+    restart: on-failure
+    env_file:
+      - .env
+    environment:
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+    ports:
+      - 5002:5002
+    volumes:
+      - ./servicedb:/servicedb:ro
+  
+
+
